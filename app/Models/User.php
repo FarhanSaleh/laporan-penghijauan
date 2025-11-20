@@ -18,9 +18,10 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'nama',
         'email',
         'password',
+        'role_id',
     ];
 
     /**
@@ -44,5 +45,36 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Relasi ke Role
+     */
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    /**
+     * Helper methods untuk pengecekan role
+     */
+    public function isAdmin()
+    {
+        return $this->role->name === 'admin';
+    }
+
+    public function isPetugas()
+    {
+        return $this->role->name === 'petugas';
+    }
+
+    public function isUser()
+    {
+        return $this->role->name === 'user';
+    }
+
+    public function hasRole($role)
+    {
+        return $this->role->name === $role;
     }
 }
