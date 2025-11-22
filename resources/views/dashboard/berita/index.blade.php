@@ -1,4 +1,4 @@
-<x-dashboard-layout section_title="Users" description="Kelola data user">
+<x-dashboard-layout section_title="Berita" description="Kelola data berita">
     <button class="btn btn-primary btn-sm md:btn-md">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd"
@@ -12,7 +12,7 @@
             <div class="overflow-x-auto">
                 <table class="table table-zebra w-full">
                     <!-- Head -->
-                    <thead class="bg-base-200 text-base-content">
+                    {{-- <thead class="bg-base-200 text-base-content">
                         <tr>
                             <th>#</th>
                             <th>Nama Lengkap</th>
@@ -39,7 +39,7 @@
                             </td>
                         </tr>
                         @endforeach
-                    </tbody>
+                    </tbody> --}}
                 </table>
             </div>
         </div>

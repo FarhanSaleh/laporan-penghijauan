@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Login - {{ config('app.name', 'Laravel') }}</title>
+    <title>Login - Laporan Penghijauan</title>
 
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
@@ -41,11 +41,7 @@
                     <!-- Alert Error -->
                     @if ($errors->any())
                     <div class="alert alert-error mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
+                        <i data-lucide="circle-x"></i>
                         <div>
                             @foreach ($errors->all() as $error)
                             <span>{{ $error }}</span><br>
@@ -57,34 +53,23 @@
                     <!-- Form Login -->
                     <form method="POST" action="{{ url('/login') }}">
                         @csrf
-
+                        @method("POST")
                         <!-- Email Input -->
-                        <div class="form-control w-full mb-4">
+                        <div class="form-control w-full mb-4 space-y-2">
                             <label class="label">
                                 <span class="label-text font-semibold">Email</span>
                             </label>
                             <input type="email" name="email" placeholder="nama@email.com"
-                                class="input input-bordered w-full @error('email') input-error @enderror"
-                                value="{{ old('email') }}" required autofocus />
-                            @error('email')
-                            <label class="label">
-                                <span class="label-text-alt text-error">{{ $message }}</span>
-                            </label>
-                            @enderror
+                                class="input input-bordered w-full" value="{{ old('email') }}" required autofocus />
                         </div>
 
                         <!-- Password Input -->
-                        <div class="form-control w-full mb-4">
+                        <div class="form-control w-full mb-4 space-y-2">
                             <label class="label">
                                 <span class="label-text font-semibold">Password</span>
                             </label>
                             <input type="password" name="password" placeholder="Masukkan password"
-                                class="input input-bordered w-full @error('password') input-error @enderror" required />
-                            @error('password')
-                            <label class="label">
-                                <span class="label-text-alt text-error">{{ $message }}</span>
-                            </label>
-                            @enderror
+                                class="input input-bordered w-full" required />
                         </div>
 
                         <!-- Remember Me Checkbox -->
@@ -120,6 +105,10 @@
 
         </div>
     </div>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 
 </html>

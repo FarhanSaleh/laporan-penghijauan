@@ -10,6 +10,6 @@ class DashboardController extends Controller
     public function index()
     {
         $users = User::with('role')->get();
-        return view('dashboard', ['users' => $users]);
+        return view('dashboard.index', ['users' => $users]);
     }
 }

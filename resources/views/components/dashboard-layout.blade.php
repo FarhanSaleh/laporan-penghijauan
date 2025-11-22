@@ -26,11 +26,7 @@
             <div class="navbar bg-base-100 shadow-sm lg:hidden">
                 <div class="flex-none">
                     <label for="my-drawer-2" aria-label="open sidebar" class="btn btn-square btn-ghost">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            class="inline-block w-6 h-6 stroke-current">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
+                        <i data-lucide="hamburger"></i>
                     </label>
                 </div>
                 <div class="flex-1">
@@ -43,7 +39,7 @@
                     <h1 class="text-2xl font-bold text-gray-800">{{ $section_title }}</h1>
                     <p class="text-sm text-gray-500">{{ $description }}</p>
                 </div>
-                <div class="mt-6">
+                <div class="mt-6 space-y-4">
                     {{ $slot }}
                 </div>
             </main>
@@ -55,63 +51,66 @@
 
             <aside class="bg-base-100 w-64 min-h-screen flex flex-col">
                 <!-- Sidebar Logo/Header -->
-                <div class="h-16 flex items-center justify-center border-b">
+                <div class="h-16 flex items-center justify-center">
                     <div class="flex items-center gap-2 font-bold text-xl text-primary">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-8 h-8">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
-                        </svg>
+                        <i data-lucide="trees"></i>
                         <span>Laporan Penghijauan</span>
                     </div>
                 </div>
 
                 <!-- Sidebar Menu -->
-                <ul class="menu p-4 w-full text-base-content gap-2">
+                
+                <ul class="menu w-full text-base-content gap-2">
+                    Menu
                     <!-- Menu 1: Dashboard -->
                     <li>
-                        <a class="font-medium">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                            </svg>
+                        <a href="{{ route('dashboard') }}"
+                            class="font-medium {{ request()->routeIs('dashboard') ? 'menu-active' : '' }}">
+                            <i data-lucide="layout-dashboard"></i>
                             Dashboard
                         </a>
                     </li>
 
-                    <!-- Menu 2: Users (Active State) -->
+                    <!-- Menu 2: Users -->
+                    {{-- @if (auth()->user()->hasRole('admin')) --}}
                     <li>
-                        <a class="active font-medium bg-primary text-white">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                            </svg>
+                        <a href="{{ route('dashboard.user.index') }}"
+                            class="font-medium {{ request()->routeIs('dashboard.user.*') ? 'menu-active' : '' }}">
+                            <i data-lucide="users-round"></i>
                             Data Pengguna
                         </a>
                     </li>
+                    {{-- @endif --}}
 
-                    <!-- Menu 3: Settings -->
+                    <!-- Menu 3: Laporan -->
                     <li>
-                        <a class="font-medium">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                            </svg>
-                            Pengaturan
+                        <a href="{{ route('dashboard.laporan.index') }}"
+                            class="font-medium {{ request()->routeIs('dashboard.laporan.*') ? 'menu-active' : '' }}">
+                            <i data-lucide="message-circle-warning"></i>
+                            Laporan
+                        </a>
+                    </li>
+
+                    <!-- Menu 4: Berita -->
+                    <li>
+                        <a href="{{ route('dashboard.berita.index') }}"
+                            class="font-medium {{ request()->routeIs('dashboard.berita.*') ? 'menu-active' : '' }}">
+                            <i data-lucide="newspaper"></i>
+                            Berita
                         </a>
                     </li>
                 </ul>
 
+                <div class="mt-auto bg-neutral-content h-0.5 mx-2"></div>
                 <!-- User Profile Bottom -->
-                <div class="mt-auto border-t p-4">
+                <div class=" mb-4 p-2">
                     <div class="dropdown dropdown-top w-full">
-                        <div tabindex="0" role="button" class="btn btn-dash flex justify-start">
-                            <h4 class="font-bold text-sm truncate">{{ auth()->user()->nama }}</h4>
+                        <div tabindex="0" role="button"
+                            class="flex gap-2 items-center py-2 px-4 rounded-sm hover:cursor-pointer hover:bg-base-300">
+                            <i data-lucide="user-round"></i>
+                            <div class="font-semibold text-sm line-clamp-1">
+                                {{ auth()->user()->nama }} | {{ auth()->user()->role->name }}
+                            </div>
                         </div>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -129,6 +128,10 @@
 
         </div>
     </div>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 
 </html>
