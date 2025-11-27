@@ -74,4 +74,7 @@ Route::middleware("auth")->group(function () {
     Route::get("/berita", [BeritaController::class, "index"])->name(
         "dashboard.berita.index",
     );
+
+    Route::get("/profile", [UserController::class, "showProfile"])->name("profile.show");
+    Route::put("/profile", [UserController::class, "updateProfile"])->name("profile.update");
 });

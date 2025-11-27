@@ -6,6 +6,7 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -86,5 +87,44 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->route('dashboard.user.index')->with('success', 'User berhasil dihapus');
+    }
+
+    public function showProfile()
+    {
+        $user = Auth::user();
+        return view('profile.show', ['user' => $user]);
+    }
+
+    public function updateProfile(Request $request)
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+
+        $validator = Validator::make($request->all(), [
+            'nama' => 'required|string|max:255',
+            'email' => "required|email|unique:users,email,$user->id",
+            'password' => 'nullable|min:8',
+            'password_confirmation' => 'same:password'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->route('profile.show')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $validated = $validator->validated();
+
+        $user->nama = $validated['nama'];
+        $user->email = $validated['email'];
+
+        if ($validated['password']) {
+            $user->password = Hash::make($validated['password']);
+        }
+
+        $user->save();
+
+        return redirect()->route('profile.show')->with('success', 'Profil berhasil diperbarui');
     }
 }

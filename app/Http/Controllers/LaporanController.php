@@ -148,7 +148,7 @@ class LaporanController extends Controller
         $laporan->delete();
 
         return redirect()
-            ->route("dashboard.laporan.index")
+            ->route("dashboard.laporan.showByUser")
             ->with("success", "Laporan berhasil dihapus");
     }
 
