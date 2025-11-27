@@ -212,7 +212,18 @@
                             <td>{{ $l->judul }}</td>
                             <td>{{ $l->alamat }}</td>
                             <td>{{ $l->tanggal_laporan->format('d M Y | H:i') }}</td>
-                            <td>{{ $l->status->name }}</td>
+                            <td>
+                                @php
+                                $statusColor = match($l->status->name) {
+                                'Pending' => 'badge-warning',
+                                'Diproses' => 'badge-info',
+                                'Selesai' => 'badge-success',
+                                'Ditolak' => 'badge-error',
+                                default => 'badge-ghost'
+                                };
+                                @endphp
+                                <span class="badge {{ $statusColor }}">{{ $l->status->name }}</span>
+                            </td>
                             <td class="text-center">
                                 <div class="join">
                                     @if (auth()->user()->hasRole('user'))

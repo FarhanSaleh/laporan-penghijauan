@@ -45,7 +45,16 @@
                         </div>
                         <div>
                             <span class="text-gray-500">Status Saat Ini:</span>
-                            <span id="followup_status_current" class="font-medium ml-1">{{ $laporan->status->name
+                            @php
+                            $statusColor = match($laporan->status->name) {
+                            'Pending' => 'badge-warning',
+                            'Diproses' => 'badge-info',
+                            'Selesai' => 'badge-success',
+                            'Ditolak' => 'badge-error',
+                            default => 'badge-ghost'
+                            };
+                            @endphp
+                            <span id="followup_status_current" class="badge {{ $statusColor }} ml-1">{{ $laporan->status->name
                                 }}</span>
                         </div>
                         <div>
