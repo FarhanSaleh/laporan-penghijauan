@@ -25,7 +25,7 @@ return new class extends Migration
             $table->decimal('latitude', 10, 8);
             $table->decimal('longitude', 11, 8);
             $table->string('foto_laporan');
-            $table->date('tanggal_laporan');
+            $table->timestamp('tanggal_laporan');
             $table->timestamps();
             $table->foreignId('user_id')->constrained('users')->onDelete('restrict');
             $table->foreignId('status_id')->constrained('status_laporan')->onDelete('restrict');
@@ -33,15 +33,13 @@ return new class extends Migration
 
         Schema::create('tindak_lanjut', function (Blueprint $table) {
             $table->id();
-            $table->text('catatan');
-            $table->string('foto_bukti');
-            $table->date('tanggal_laporan');
+            $table->text('catatan')->nullable();
+            $table->string('foto_bukti')->nullable();
+            $table->timestamp('tanggal_laporan');
             $table->timestamps();
-            $table->foreignId('user_id')->constrained('users')->onDelete('restrict');
-            $table->foreignId('laporan_id')->constrained('laporan')->onDelete('restrict');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('laporan_id')->constrained('laporan')->onDelete('cascade');
         });
-
-
     }
 
     /**

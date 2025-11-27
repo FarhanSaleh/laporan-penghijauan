@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
         $adminRole = Role::where('name', 'admin')->first();
         $petugasRole = Role::where('name', 'petugas')->first();
         $userRole = Role::where('name', 'user')->first();
+        $komunitasRole = Role::where('name', 'komunitas')->first();
 
         // Buat user admin
         User::create([
@@ -60,6 +61,14 @@ class UserSeeder extends Seeder
             'email' => 'john@example.com',
             'password' => Hash::make('password'),
             'role_id' => $userRole->id,
+            'email_verified_at' => now(),
+        ]);
+
+        User::create([
+            'nama' => 'Komunitas Hijau',
+            'email' => 'komunitas@example.com',
+            'password' => Hash::make('password'),
+            'role_id' => $komunitasRole->id,
             'email_verified_at' => now(),
         ]);
     }

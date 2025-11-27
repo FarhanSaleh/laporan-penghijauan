@@ -59,7 +59,7 @@
                 </div>
 
                 <!-- Sidebar Menu -->
-                
+
                 <ul class="menu w-full text-base-content gap-2">
                     Menu
                     <!-- Menu 1: Dashboard -->
@@ -72,7 +72,7 @@
                     </li>
 
                     <!-- Menu 2: Users -->
-                    {{-- @if (auth()->user()->hasRole('admin')) --}}
+                    @if (auth()->user()->hasRole('admin'))
                     <li>
                         <a href="{{ route('dashboard.user.index') }}"
                             class="font-medium {{ request()->routeIs('dashboard.user.*') ? 'menu-active' : '' }}">
@@ -80,15 +80,29 @@
                             Data Pengguna
                         </a>
                     </li>
-                    {{-- @endif --}}
+                    @endif
 
                     <!-- Menu 3: Laporan -->
                     <li>
+                        @if (auth()->user()->hasRole('admin'))
                         <a href="{{ route('dashboard.laporan.index') }}"
                             class="font-medium {{ request()->routeIs('dashboard.laporan.*') ? 'menu-active' : '' }}">
                             <i data-lucide="message-circle-warning"></i>
                             Laporan
                         </a>
+                        @elseif (auth()->user()->hasRole('user'))
+                        <a href="{{ route('dashboard.laporan.showByUser') }}"
+                            class="font-medium {{ request()->routeIs('dashboard.laporan.*') ? 'menu-active' : '' }}">
+                            <i data-lucide="message-circle-warning"></i>
+                            Laporan
+                        </a>
+                        @elseif (auth()->user()->hasRole('petugas'))
+                        <a href="{{ route('dashboard.laporan.petugas') }}"
+                            class="font-medium {{ request()->routeIs('dashboard.laporan.*') ? 'menu-active' : '' }}">
+                            <i data-lucide="message-circle-warning"></i>
+                            Laporan
+                        </a>
+                        @endif
                     </li>
 
                     <!-- Menu 4: Berita -->
