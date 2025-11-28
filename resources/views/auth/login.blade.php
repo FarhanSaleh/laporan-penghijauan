@@ -22,7 +22,7 @@
                 <div class="card-body">
                     <!-- Header -->
                     <div class="text-center mb-6">
-                        <h1 class="text-3xl font-bold text-primary">Selamat Datang</h1>
+                        <h1 class="text-3xl font-bold text-primary">Welcome</h1>
                         <p class="text-base-content/60 mt-2">Silakan login ke akun Anda</p>
                     </div>
 
