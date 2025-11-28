@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Login - Laporan Penghijauan</title>
+    <title>Register - Laporan Penghijauan</title>
 
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
@@ -22,8 +22,8 @@
                 <div class="card-body">
                     <!-- Header -->
                     <div class="text-center mb-6">
-                        <h1 class="text-3xl font-bold text-primary">Selamat Datang</h1>
-                        <p class="text-base-content/60 mt-2">Silakan login ke akun Anda</p>
+                        <h1 class="text-3xl font-bold text-primary">Daftar Akun</h1>
+                        <p class="text-base-content/60 mt-2">Buat akun baru untuk melaporkan penghijauan</p>
                     </div>
 
                     <!-- Alert Success -->
@@ -50,17 +50,35 @@
                     </div>
                     @endif
 
-                    <!-- Form Login -->
-                    <form method="POST" action="{{ url('/login') }}">
+                    <!-- Form Register -->
+                    <form method="POST" action="{{ url('/register') }}">
                         @csrf
                         @method("POST")
+
+                        <!-- Nama Input -->
+                        <div class="form-control w-full mb-4 space-y-2">
+                            <label class="label">
+                                <span class="label-text font-semibold">Nama Lengkap</span>
+                            </label>
+                            <input type="text" name="nama" placeholder="Nama lengkap Anda"
+                                class="input input-bordered w-full @error('nama') input-error @enderror"
+                                value="{{ old('nama') }}" required autofocus />
+                            @error('nama')
+                            <span class="text-error text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
+
                         <!-- Email Input -->
                         <div class="form-control w-full mb-4 space-y-2">
                             <label class="label">
                                 <span class="label-text font-semibold">Email</span>
                             </label>
                             <input type="email" name="email" placeholder="nama@email.com"
-                                class="input input-bordered w-full" value="{{ old('email') }}" required autofocus />
+                                class="input input-bordered w-full @error('email') input-error @enderror"
+                                value="{{ old('email') }}" required />
+                            @error('email')
+                            <span class="text-error text-sm">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <!-- Password Input -->
@@ -68,16 +86,24 @@
                             <label class="label">
                                 <span class="label-text font-semibold">Password</span>
                             </label>
-                            <input type="password" name="password" placeholder="Masukkan password"
-                                class="input input-bordered w-full" required />
+                            <input type="password" name="password" placeholder="Minimal 8 karakter"
+                                class="input input-bordered w-full @error('password') input-error @enderror" required />
+                            @error('password')
+                            <span class="text-error text-sm">{{ $message }}</span>
+                            @enderror
                         </div>
 
-                        <!-- Remember Me Checkbox -->
-                        <div class="form-control mb-6">
-                            <label class="label cursor-pointer justify-start gap-3">
-                                <input type="checkbox" name="remember" class="checkbox checkbox-primary checkbox-sm" />
-                                <span class="label-text">Ingat saya</span>
+                        <!-- Password Confirmation Input -->
+                        <div class="form-control w-full mb-6 space-y-2">
+                            <label class="label">
+                                <span class="label-text font-semibold">Konfirmasi Password</span>
                             </label>
+                            <input type="password" name="password_confirmation" placeholder="Ulangi password"
+                                class="input input-bordered w-full @error('password_confirmation') input-error @enderror"
+                                required />
+                            @error('password_confirmation')
+                            <span class="text-error text-sm">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <!-- Submit Button -->
@@ -85,9 +111,9 @@
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                                    d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
                             </svg>
-                            Login
+                            Daftar
                         </button>
                     </form>
 
@@ -97,7 +123,8 @@
                     <!-- Additional Links -->
                     <div class="text-center space-y-2">
                         <p class="text-sm text-base-content/60">
-                            Belum punya akun? <a href="{{ route('register') }}" class="link link-primary font-semibold">Daftar sekarang</a>
+                            Sudah punya akun? <a href="{{ route('login') }}"
+                                class="link link-primary font-semibold">Login di sini</a>
                         </p>
                     </div>
                 </div>

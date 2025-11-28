@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -17,6 +19,13 @@ class LoginController extends Controller
             return redirect()->route('dashboard');
         }
         return view('auth.login');
+    }
+    public function showRegisterForm()
+    {
+        if (Auth::check()){
+            return redirect()->route('dashboard');
+        }
+        return view('auth.register');
     }
 
     /**
@@ -57,6 +66,43 @@ class LoginController extends Controller
         return redirect()->back()
             ->withErrors(['email' => 'Email atau password salah'])
             ->withInput($request->only('email'));
+    }
+
+    /**
+     * Proses register
+     */
+    public function register(Request $request)
+    {
+        // Validasi input
+        $validator = Validator::make($request->all(), [
+            'nama' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:8|confirmed',
+        ], [
+            'nama.required' => 'Nama harus diisi',
+            'email.required' => 'Email harus diisi',
+            'email.email' => 'Format email tidak valid',
+            'email.unique' => 'Email sudah terdaftar',
+            'password.required' => 'Password harus diisi',
+            'password.min' => 'Password minimal 8 karakter',
+            'password.confirmed' => 'Konfirmasi password tidak cocok',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        // Buat user baru dengan role user
+        $user = User::create([
+            'nama' => $request->nama,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role_id' => 3, // ID role user (pastikan sesuai database Anda)
+        ]);
+
+        return redirect('/login')->with('success', 'Akun berhasil dibuat! Silakan login dengan email dan password Anda.');
     }
 
     /**

@@ -54,8 +54,8 @@
                             default => 'badge-ghost'
                             };
                             @endphp
-                            <span id="followup_status_current" class="badge {{ $statusColor }} ml-1">{{ $laporan->status->name
-                                }}</span>
+                            <span id="followup_status_current"
+                                class="badge {{ $statusColor }} ml-1">{{$laporan->status->name }}</span>
                         </div>
                         <div>
                             <span class="text-gray-500">Alamat:</span>

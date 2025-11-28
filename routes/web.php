@@ -12,7 +12,9 @@ Route::get("/", function () {
 });
 
 Route::get("/login", [LoginController::class, "showLoginForm"])->name("login");
+Route::get("/register", [LoginController::class, "showRegisterForm"])->name("register");
 Route::post("/login", [LoginController::class, "login"]);
+Route::post("/register", [LoginController::class, "register"]);
 Route::post("/logout", [LoginController::class, "logout"])->name("logout");
 
 Route::middleware("auth")->group(function () {
@@ -70,10 +72,6 @@ Route::middleware("auth")->group(function () {
         LaporanController::class,
         "showFollowup",
     ])->name("dashboard.laporan.showFollowup");
-
-    Route::get("/berita", [BeritaController::class, "index"])->name(
-        "dashboard.berita.index",
-    );
 
     Route::get("/profile", [UserController::class, "showProfile"])->name("profile.show");
     Route::put("/profile", [UserController::class, "updateProfile"])->name("profile.update");

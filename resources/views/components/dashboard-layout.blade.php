@@ -104,15 +104,6 @@
                         </a>
                         @endif
                     </li>
-
-                    <!-- Menu 4: Berita -->
-                    <li>
-                        <a href="{{ route('dashboard.berita.index') }}"
-                            class="font-medium {{ request()->routeIs('dashboard.berita.*') ? 'menu-active' : '' }}">
-                            <i data-lucide="newspaper"></i>
-                            Berita
-                        </a>
-                    </li>
                 </ul>
 
                 <div class="mt-auto bg-neutral-content h-0.5 mx-2"></div>
