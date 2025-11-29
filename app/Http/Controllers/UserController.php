@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\User;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -84,9 +85,19 @@ class UserController extends Controller
 
         $user = User::findOrFail($id);
 
-        $user->delete();
+        try {
+            $user->delete();
 
-        return redirect()->route('dashboard.user.index')->with('success', 'User berhasil dihapus');
+            return redirect()->route('dashboard.user.index')->with('success', 'User berhasil dihapus');
+        } catch (QueryException $e) {
+            if ($e->getCode() == '23000') {
+                return redirect()->route('dashboard.user.index')
+                    ->withErrors(['error' => 'User tidak dapat dihapus karena memiliki data terkait']);
+            }
+
+            return redirect()->route('dashboard.user.index')
+                ->withErrors(['error' => 'Ada kesalahan saat menghapus user']);
+        }
     }
 
     public function showProfile()

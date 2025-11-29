@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\RecordsActivity;
 use Illuminate\Database\Eloquent\Model;
 
 class TindakLanjut extends Model
 {
+    use RecordsActivity;
+    
     protected $table = 'tindak_lanjut';
 
     protected $fillable = [

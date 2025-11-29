@@ -71,18 +71,7 @@
                         </a>
                     </li>
 
-                    <!-- Menu 2: Users -->
-                    @if (auth()->user()->hasRole('admin'))
-                    <li>
-                        <a href="{{ route('dashboard.user.index') }}"
-                            class="font-medium {{ request()->routeIs('dashboard.user.*') ? 'menu-active' : '' }}">
-                            <i data-lucide="users-round"></i>
-                            Data Pengguna
-                        </a>
-                    </li>
-                    @endif
-
-                    <!-- Menu 3: Laporan -->
+                    <!-- Menu 2: Laporan -->
                     <li>
                         @if (auth()->user()->hasRole('admin'))
                         <a href="{{ route('dashboard.laporan.index') }}"
@@ -104,6 +93,24 @@
                         </a>
                         @endif
                     </li>
+
+                    <!-- Menu 3: Users -->
+                    @if (auth()->user()->hasRole('admin'))
+                    <li>
+                        <a href="{{ route('dashboard.user.index') }}"
+                            class="font-medium {{ request()->routeIs('dashboard.user.*') ? 'menu-active' : '' }}">
+                            <i data-lucide="users-round"></i>
+                            Data Pengguna
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('activity-log.index') }}"
+                            class="font-medium {{ request()->routeIs('activity-log.*') ? 'menu-active' : '' }}">
+                            <i data-lucide="clipboard-clock"></i>
+                            Log Aktivitas
+                        </a>
+                    </li>
+                    @endif
                 </ul>
 
                 <div class="mt-auto bg-neutral-content h-0.5 mx-2"></div>

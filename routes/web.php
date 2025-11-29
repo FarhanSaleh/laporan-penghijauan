@@ -6,6 +6,7 @@ use App\Http\Controllers\LaporanController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ActivityLogController;
 
 Route::get("/", function () {
     return redirect("dashboard");
@@ -75,4 +76,8 @@ Route::middleware("auth")->group(function () {
 
     Route::get("/profile", [UserController::class, "showProfile"])->name("profile.show");
     Route::put("/profile", [UserController::class, "updateProfile"])->name("profile.update");
+
+    Route::middleware("role:admin")->group(function () {
+        Route::get("/activity-log", [ActivityLogController::class, "index"])->name("activity-log.index");
+    });
 });

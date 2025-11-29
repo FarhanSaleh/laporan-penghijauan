@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\RecordsActivity;
 use Illuminate\Database\Eloquent\Model;
 
 class Laporan extends Model
 {
+    use RecordsActivity;
+    
     protected $table = 'laporan';
     protected $fillable = [
         'judul',

@@ -15,14 +15,14 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        if (Auth::check()){
+        if (Auth::check()) {
             return redirect()->route('dashboard');
         }
         return view('auth.login');
     }
     public function showRegisterForm()
     {
-        if (Auth::check()){
+        if (Auth::check()) {
             return redirect()->route('dashboard');
         }
         return view('auth.register');
@@ -58,7 +58,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials, $remember)) {
             // Login berhasil
             $request->session()->regenerate();
-
+            catat_log('login', 'Melakukan Login', Auth::user(), ['ip' => $request->ip()]);
             return redirect()->intended('/dashboard')->with('success', 'Login berhasil!');
         }
 
@@ -102,6 +102,7 @@ class LoginController extends Controller
             'role_id' => 3, // ID role user (pastikan sesuai database Anda)
         ]);
 
+        catat_log('register', 'Melakukan Register', null, ['ip' => $request->ip()]);
         return redirect('/login')->with('success', 'Akun berhasil dibuat! Silakan login dengan email dan password Anda.');
     }
 
@@ -110,6 +111,7 @@ class LoginController extends Controller
      */
     public function logout(Request $request)
     {
+        catat_log('logout', 'Melakukan Logout', Auth::user(), ['ip' => $request->ip()]);
         Auth::logout();
 
         $request->session()->invalidate();

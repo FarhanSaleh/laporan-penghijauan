@@ -63,13 +63,5 @@ class UserSeeder extends Seeder
             'role_id' => $userRole->id,
             'email_verified_at' => now(),
         ]);
-
-        User::create([
-            'nama' => 'Komunitas Hijau',
-            'email' => 'komunitas@example.com',
-            'password' => Hash::make('password'),
-            'role_id' => $komunitasRole->id,
-            'email_verified_at' => now(),
-        ]);
     }
 }
