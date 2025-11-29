@@ -11,7 +11,8 @@
         <div class="lg:col-span-1">
             <div class="card bg-base-100 shadow-sm">
                 <div class="card-body items-center text-center">
-                    <div class="w-20 h-20 rounded-full bg-primary text-white flex items-center justify-center text-2xl font-bold">
+                    <div
+                        class="w-20 h-20 rounded-full bg-primary text-white flex items-center justify-center text-2xl font-bold">
                         {{ strtoupper(substr($user->nama, 0, 1)) }}
                     </div>
                     <h2 class="text-xl font-bold mt-4">{{ $user->nama }}</h2>
@@ -20,6 +21,7 @@
                     <div class="text-xs text-gray-400 mt-4">
                         <p>Bergabung: {{ $user->created_at->format('d M Y') }}</p>
                     </div>
+                    <a href="{{ route('2fa.setup') }}" class="btn btn-sm btn-outline btn-primary">Atur 2FA</a>
                 </div>
             </div>
         </div>
@@ -38,7 +40,8 @@
                         <fieldset class="fieldset">
                             <legend class="fieldset-legend">Nama Lengkap</legend>
                             <input type="text" class="input input-bordered w-full @error('nama') input-error @enderror"
-                                name="nama" value="{{ old('nama', $user->nama) }}" placeholder="Masukkan nama lengkap" />
+                                name="nama" value="{{ old('nama', $user->nama) }}"
+                                placeholder="Masukkan nama lengkap" />
                             @error('nama')
                             <p class="label text-error">{{ $message }}</p>
                             @enderror
@@ -47,8 +50,9 @@
                         {{-- Email --}}
                         <fieldset class="fieldset">
                             <legend class="fieldset-legend">Email</legend>
-                            <input type="email" class="input input-bordered w-full @error('email') input-error @enderror"
-                                name="email" value="{{ old('email', $user->email) }}" placeholder="Masukkan email" />
+                            <input type="email"
+                                class="input input-bordered w-full @error('email') input-error @enderror" name="email"
+                                value="{{ old('email', $user->email) }}" placeholder="Masukkan email" />
                             @error('email')
                             <p class="label text-error">{{ $message }}</p>
                             @enderror
@@ -61,7 +65,8 @@
                             <legend class="fieldset-legend">Password Baru</legend>
                             <input type="password"
                                 class="input input-bordered w-full @error('password') input-error @enderror"
-                                name="password" placeholder="Masukkan password baru (kosongkan jika tidak ingin mengubah)" />
+                                name="password"
+                                placeholder="Masukkan password baru (kosongkan jika tidak ingin mengubah)" />
                             @error('password')
                             <p class="label text-error">{{ $message }}</p>
                             @enderror
