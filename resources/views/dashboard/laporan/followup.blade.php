@@ -27,7 +27,7 @@
         <div class="card bg-base-100 shadow-sm xl:col-span-3">
             <div class="card-body">
                 {{-- Display report info --}}
-                <div class="bg-base-200 p-4 rounded-lg border border-gray-200 space-y-4">
+                <div class="bg-base-100 p-4 rounded-lg border border-gray-200 space-y-4">
                     <h4 class="font-semibold">Informasi Laporan</h4>
                     <div class="grid sm:grid-cols-2 gap-2 text-sm">
                         <div>
@@ -86,7 +86,7 @@
                 </div>
 
                 {{-- Foto Laporan --}}
-                <div class="bg-base-200 p-4 rounded-lg border border-gray-200">
+                <div class="bg-base-100 p-4 rounded-lg border border-gray-200">
                     <h4 class="font-semibold mb-3">Foto Laporan <span class="font-normal text-gray-500">(klik gambar
                             untuk melihat lebih jelas)</span></h4>
                     <img src="{{ asset('storage/' . $laporan->foto_laporan) }}" alt="{{ $laporan->judul }}"
@@ -96,11 +96,11 @@
 
                 {{-- History Tindak Lanjut --}}
                 @if ($laporan->tindakLanjut && $laporan->tindakLanjut->count() > 0)
-                <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
-                    <h4 class="font-semibold mb-3 text-blue-900">Riwayat Tindak Lanjut</h4>
+                <div class="bg-green-50 p-4 rounded-lg border border-blue-200">
+                    <h4 class="font-semibold mb-3 text-green-900">Riwayat Tindak Lanjut</h4>
                     <div class="space-y-3">
                         @foreach ($laporan->tindakLanjut->sortByDesc('created_at') as $tindak)
-                        <div class="bg-white p-3 rounded-lg border-l-4 border-blue-500">
+                        <div class="bg-white p-3 rounded-lg border-l-4 border-green-500">
                             <div class="flex justify-between items-start mb-2">
                                 <div>
                                     <p class="text-sm font-medium text-gray-700">{{ $tindak->user->nama }}</p>

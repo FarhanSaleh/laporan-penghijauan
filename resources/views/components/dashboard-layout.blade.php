@@ -1,6 +1,6 @@
 @props(["section_title", "description"])
 <!DOCTYPE html>
-<html lang="id" data-theme="light">
+<html lang="id" data-theme="emerald">
 
 <head>
     <meta charset="utf-8">

@@ -142,7 +142,7 @@
 
                     <!-- QR Code Display -->
                     <div class="flex justify-center bg-base-200 p-8 rounded-lg mb-4">
-                        <img src="{!! $qrCodeUrl !!}" alt="2FA QR Code" class="w-64 h-64">
+                        <img src="{{ $qrCodeUrl }}" alt="2FA QR Code" class="w-64 h-64">
                     </div>
 
                     <!-- Manual Key Input -->
