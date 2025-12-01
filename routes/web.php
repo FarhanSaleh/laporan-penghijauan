@@ -10,7 +10,7 @@ use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\TwoFactorController;
 
 Route::get("/", function () {
-    return redirect("dashboard");
+    return view('welcome');
 });
 
 Route::get("/login", [LoginController::class, "showLoginForm"])->name("login");
