@@ -26,7 +26,7 @@ class RoleMiddleware
         $userRole = Auth::user()->role->name;
 
         if (!in_array($userRole, $roles)) {
-            abort(403, 'Anda tidak memiliki akses ke halaman ini');
+            return redirect('/')->with('error', 'Anda tidak memiliki akses ke halaman tersebut');
         }
 
         return $next($request);
